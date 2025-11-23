@@ -57,11 +57,10 @@ module test;
 `endif
                      );
 
+   //- Count the output clocks
    integer        count = 0;
    integer        lastcount = 0;
-
    always_ff @(posedge uo_out[0] or negedge clk) begin
-
       if(clk) begin
          if(uo_out[0])
            count += 1;
