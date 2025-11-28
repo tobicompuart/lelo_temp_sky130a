@@ -28,13 +28,19 @@
 
 module test;
 
+   //- Clock period is set to 1/(32768 Hz) ns
+   //- Most micro controllers will have a real time clock of this frequency
    int clk_period = 30517;
 
+   //- Initialize reset ETC
    logic rst_n = 0;
    logic clk = 0;
    logic ena = 0;
+
+   //- Our real time clock
    always #(clk_period/2) clk = ~clk;
 
+   //- Default temperature
    real  temperature = -40;
 
    logic [7:0]    ui_in;
@@ -43,7 +49,7 @@ module test;
    logic [7:0]    uio_out;
    logic [7:0]    uio_oe;
 
-   lelo_temp  dut (
+   `LELO_DESIGN  dut (
                      .ui_in(ui_in),
                      .uo_out(uo_out),
                      .uio_in(uio_in),
@@ -52,24 +58,25 @@ module test;
                      .ena(ena),
                      .clk(clk),
                      .rst_n(rst_n)
+//- Magic to feed the temperature into the verilog model
 `ifdef ANA_TYPE_REAL
    ,.temperature(temperature)
 `endif
                      );
 
-   //- Count the output clocks
-   integer        count = 0;
-   integer        lastcount = 0;
-   always_ff @(posedge uo_out[0] or negedge clk) begin
-      if(clk) begin
-         if(uo_out[0])
-           count += 1;
-      end
-      else begin
-         lastcount = count;
-         count = 0;
-      end
-   end // always_ff @ (posedge uo_out[0] or negedge clk)
+   wire [10:0]    count;
+   
+   //- Counter to count the oscillator clock cycles from the analog module
+   logic reset = 0;
+   counter dut_count (.clk(uo_out[0]),
+                      .reset(reset),
+                      .count(count));
+
+   //- Synchronize the count to the clock domain
+   logic [10:0] lastcount;
+   always_ff @(posedge clk ) begin
+      lastcount <= count;
+   end
 
    integer i;
    integer f;
@@ -80,9 +87,13 @@ module test;
 
    initial
      begin
-        $dumpfile("tb_lelo_temp.vcd");
+
+        //- Output a file that can be opened in GTKWave
+        $dumpfile("tb.vcd");
         $dumpvars(0,test);
-        f = $fopen("output.txt","w");
+
+        //- Create a CSV file
+        f = $fopen("tb.csv","w");
         $fwrite(f,"temperature,count\n");
         ui_in = 0;
         #10 rst_n = 0;
@@ -91,13 +102,18 @@ module test;
         //Enable the module
         ui_in[0] = 1;
 
-        //change the temperature
+        //Change the temperature
         tstep = (125+40)/steps;
-        @(negedge clk)
+        @(posedge clk)
+         #10 reset = 1;
+         #10 reset = 0;
         for (i=0;i<steps;i++) begin
-           @(negedge clk)
+           @(posedge clk)
+           #10 reset = 1;
+           #10 reset = 0;
            temperature +=tstep;
-           $fwrite(f,"%d,%d\n",temperature,lastcount);
+           if(i > 1)
+             $fwrite(f,"%d,%d\n",temperature,lastcount);
         end
 
         #(clk_period*2) $stop;
