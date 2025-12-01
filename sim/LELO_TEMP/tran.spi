@@ -36,7 +36,9 @@ VPWR  PWRUP_1V8  VSS  pwl 0 0 1u 0 {1u + 10p} {AVDD}
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
-.save all
+*.save all
+.save v(vdd_1v8) v(vss) v(pwrup_1v8) v(osc_temp_1v8)
+.save v(xdut.LPI) v(xdut.CMPO) v(xdut.clk)
 .save i(vdd)
 
 *----------------------------------------------------------------
@@ -50,8 +52,19 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
-tran 0.1n 10u
-write
+#ifdef Nosweep
+tran 0.1n {t_stop}
+write {cicname}.raw
+#else
+set fend = .raw
+foreach vtemp {temperatures}
+  option temp=$vtemp
+  tran 0.1n {t_stop}
+  write {cicname}_$vtemp$fend
+end
+
+#endif
+
 quit
 
 

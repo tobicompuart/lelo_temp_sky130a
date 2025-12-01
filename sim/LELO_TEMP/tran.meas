@@ -1,9 +1,52 @@
 * Measure LELO_TEMP
 .control
 
-load {cicname}.raw
 
 echo "MEAS_START"
+
+set fend = .raw
+
+compose temp_vec values {temperatures}
+compose t1_vec values {temperatures}
+compose t2_vec values {temperatures}
+compose period_vec values {temperatures}
+compose freq_vec values {temperatures}
+*let t1_vec     =
+*let t2_vec     = temp_vec
+*let period_vec = temp_vec
+*let freq_vec   = temp_vec
+
+* Vectors to hold results (they'll be created on first append)
+* No need to pre-declare them.
+let ind=0
+foreach vtemp {temperatures}
+
+load {cicname}_$vtemp$fend
+
+* Midpoint crossings after t_start (assumes t_start is defined)
+meas tran t1 WHEN v(osc_temp_1V8)=0.9 RISE=1 CROSS=1 FROM={t_start}
+meas tran t2 WHEN v(osc_temp_1V8)=0.9 RISE=1 CROSS=2 FROM={t_start}
+
+* Copy current temperature into a scalar
+let temp = $vtemp
+
+* Compute period and frequency
+let period = t2 - t1
+let freq   = 1/period
+
+* ---- create vs index logic ----
+* later times: now we can index them
+*let temp_vec[ind]   = temp
+let t1_vec[ind]     = t1
+let t2_vec[ind]     = t2
+let period_vec[ind] = period
+let freq_vec[ind]   = freq
+let ind = ind + 1
+end
+
+
+* Now print the full vectors
+print temp_vec t1_vec t2_vec period_vec freq_vec
 
 echo "MEAS_END"
 .endc
