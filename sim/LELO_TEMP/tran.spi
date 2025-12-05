@@ -39,7 +39,7 @@ VPWR  PWRUP_1V8  VSS  pwl 0 0 1u 0 {1u + 10p} {AVDD}
 *.save all
 .save v(vdd_1v8) v(vss) v(pwrup_1v8) v(osc_temp_1v8)
 .save v(xdut.LPI) v(xdut.CMPO) v(xdut.clk)
-.save i(vdd)
+.save i(vdd) v(xdut.ibp_1u<0>) v(xdut.vc)
 
 *----------------------------------------------------------------
 * NGSPICE control
