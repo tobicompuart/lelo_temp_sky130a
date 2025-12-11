@@ -14,17 +14,9 @@ load {cicname}_$vtemp$fend
 meas tran t1_$vtemp WHEN v(osc_temp_1V8)=0.9 RISE=1 CROSS=1 FROM={t_start}
 meas tran t2_$vtemp WHEN v(osc_temp_1V8)=0.9 RISE=1 CROSS=2 FROM={t_start}
 
-*let temp = $vtemp
+meas tran vc FIND V(xdut.vc) AT={t_stop}
 
-*let period = t2 - t1
-*let freq   = 1/period
-
-*let freq_vec[ind]   = freq
-*let ind = ind + 1
-print ind
 end
-
-*print temp_vec freq_vec
 
 echo "MEAS_END"
 .endc

@@ -10,11 +10,15 @@ import re
 import os
 import sys
 
-
-def calcFreq(temperature,compensate=False):
-    C = 53e-15*10
-    R = 7.535e3*(8+4)
+def calcDeltaVc(temperature):
+    T0 = 273.15
     N = 8*8
+    k_q = const.k/const.e
+    delta_v = k_q*(T0+temperature)*np.log(N)
+    return delta_v
+
+def calcCurrent(temperature,compensate=False):
+    R = 7.535e3*(8+4)
     T0 = 273.15
 
     #- temperature coefficient from resistor
@@ -27,12 +31,23 @@ def calcFreq(temperature,compensate=False):
     #- boltzman/unit charge
     k_q = const.k/const.e
 
-    #- Calculate the diode voltage
-    vd = k_q*(T0 + temperature)*(3 - 3*np.log(T0 + temperature)) + 1.12
+    id = calcDeltaVc(temperature)/R_tcomp
 
-    dt = R_tcomp*C/(k_q*(T0 + temperature)*np.log(N))*vd
+    return id
 
-    freq = 1/dt/2
+def calcVc(temperature):
+    #- Calculate the diode voltage, see https://analogicus.com/aic2026/2024/10/25/Diodes.html#forward-voltage-temperature-dependence
+
+    T0 = 273.15
+    k_q = const.k/const.e
+    vc = k_q*(T0 + temperature)*(2.35 - 3*np.log(T0 + temperature)) + 1.12
+    return vc
+
+def calcFreq(temperature,compensate=False):
+    C = 53e-15*10
+    id = calcCurrent(temperature,compensate=compensate)
+
+    freq = id/(C*calcVc(temperature))
 
     return freq
 

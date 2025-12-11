@@ -17,8 +17,10 @@ def calcTemperatureFromFreq(freq,compensate=False):
     res_125 = 1/10e-6
     res_d_dtemp = (res_125 - res_n25)/(125-25)
 
-    gain = 0.89
-    offset = 17
+    gain1 = 0.55
+    offset1 = -12
+    gain2 = 0.765
+    offset2 = -12
 
 
     #- boltzman/unit charge
@@ -26,7 +28,7 @@ def calcTemperatureFromFreq(freq,compensate=False):
     #- Calculate the diode voltage
     vd = k_q*(273.15 + 25)*(ell - 3*np.log(273.15 + 25)) + 1.12
     #- Estimate first temperature
-    temperature = (freq*R*C/np.log(N)/k_q - 273.15)*0.69 + 10
+    temperature = (freq*R*C/np.log(N)/k_q - 273.15)*gain1 + offset1
 
     if(compensate):
       #- Calculate the temperature dependent resistor from the temperature
@@ -35,7 +37,7 @@ def calcTemperatureFromFreq(freq,compensate=False):
 
       vdt = k_q*(273.15 + temperature)*(ell - 3*np.log(273.15 + temperature)) + 1.12
 
-      temperature = (freq*R_tcomp*C/np.log(N)/k_q - 273.15)*vdt*gain + offset
+      temperature = (freq*R_tcomp*C/np.log(N)/k_q - 273.15)*vdt*gain2 + offset2
 
     return temperature
 
@@ -62,6 +64,7 @@ def main(name,show=False):
 
   y_no_res = calcTemperatureFromFreq(yi)
   y = calcTemperatureFromFreq(yi,compensate=True)
+
   error = y - x
 
   coefficients = np.polyfit(x, y, 1) # '1' indicates a first-degree polynomial (linear)
@@ -88,7 +91,7 @@ def main(name,show=False):
   ax[0].plot(x,y_no_res,label="Simulation no resistor compensation",marker="^")
   ax[0].plot(x,x,label="Ideal curve",marker="x")
   ax[1].plot(x,y - x,label="Error",marker="o")
-  #ax[1].plot(x,y_no_res - x,label="Error, no resistor compensation",marker="^")
+  ax[1].plot(x,y_no_res - x,label="Error, no resistor compensation",marker="^")
   ax[1].set_xlabel("Temperature [C]")
   ax[0].set_ylabel("Temperature estimate [C]")
   ax[1].set_ylabel("Temperature error [C]")
@@ -96,6 +99,7 @@ def main(name,show=False):
   ax[1].grid()
   ax[0].legend()
   ax[1].legend()
+  ax[1].set_ylim(-2,2)
   plt.tight_layout()
   if(show):
     plt.show()

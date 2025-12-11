@@ -1,4 +1,4 @@
-v {xschem version=3.4.7 file_version=1.2}
+v {xschem version=3.4.6 file_version=1.2}
 G {}
 K {}
 V {}
@@ -109,7 +109,7 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_12C1F2.sym} 490 -530 0 0 {name=xba1[7:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_12C1F2.sym} 730 -530 0 1 {name=xbb2[7:0]}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 490 -240 0 0 {name=xca1[3:0]}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 730 -240 0 1 {name=xcb2[3:0]}
-C {cborder/border_xs.sym} 270 0 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}
+C {cborder/border_xs.sym} 0 0 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}
 C {devices/lab_wire.sym} 530 -580 0 0 {name=p7 sig_type=std_logic lab=VS}
 C {devices/lab_wire.sym} 530 -300 0 0 {name=p8 sig_type=std_logic lab=VD1}
 C {JNW_ATR_SKY130A/JNWATR_PCH_12C5F0.sym} 210 -760 0 1 {name=xba6}
