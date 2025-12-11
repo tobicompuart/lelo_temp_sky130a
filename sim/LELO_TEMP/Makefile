@@ -11,7 +11,14 @@ CELL=LELO_TEMP
 LIB =LELO_TEMP_SKY130A
 OPT=
 
+all:
+	${MAKE} typical
+	${MAKE} etc
+	${MAKE} mc
+
 include ../../tech/make/sim.make
+
+
 
 test:
 	${MAKE} typical OPT="Debug"
@@ -37,10 +44,10 @@ fast: netlist fast_1 fast_2
 
 
 tfs: netlist
-	cicsim run --replace replace.yaml --name ${VIEW}_tfs ${TB} ${OPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt,Th,Tl" "Vt,Vl,Vh"
+	cicsim run --replace replace.yaml --name ${VIEW}_tfs ${TB} ${OPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt" "Vt,Vl,Vh"
 
 etc: netlist
-	cicsim run --replace replace.yaml --name ${VIEW}_etc ${TB} ${OPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Th,Tl" "Vl,Vh"
+	cicsim run --replace replace.yaml --name ${VIEW}_etc ${TB} ${OPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Tt" "Vl,Vh"
 
 mc: netlist
 	cicsim run --replace replace.yaml --name ${VIEW}_mc --count 30 ${TB} ${OPT} ${VIEW} Gt "Kttmm" "Tt" "Vt"
@@ -53,9 +60,9 @@ temp: netlist
 
 summary:
 	cicsim summary --output "README.md"
+	pandoc -s  README.md -o README.html
 
-slide:
-	pandoc -s  -t slidy README.md -o README.html
+
 
 
 clean:

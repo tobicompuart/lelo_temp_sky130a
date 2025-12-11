@@ -15,7 +15,7 @@ Where $RPPO$ is the unit resistor, nominally 7.53 k $\Omega$.
 
 The $V_C$ is a bit more complicated, but can be calculated to be 
 
-$$ V_D = \frac{kT}{q}(\ell  - 3 \ln T) + V_G $$ 
+$$ V_C = \frac{kT}{q}(\ell  - 3 \ln T) + V_G $$ 
 
 where
 

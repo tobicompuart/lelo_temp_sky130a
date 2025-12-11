@@ -1,4 +1,4 @@
 #temperatures: -40 -30 -20 -10 0 10 20 30 40 50 60 70 80 90 100 120
 temperatures: -40 25 42 125
 t_start: 2us
-t_stop: 4us
+t_stop: 6us

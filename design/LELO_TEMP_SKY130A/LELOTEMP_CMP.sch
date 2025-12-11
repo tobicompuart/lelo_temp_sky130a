@@ -9,12 +9,12 @@ N 130 -810 190 -810 {lab=VDD_1V8}
 N 190 -810 590 -810 {lab=VDD_1V8}
 N 590 -810 630 -810 {lab=VDD_1V8}
 N 530 -530 690 -530 {lab=VDD_1V8}
-N 530 -580 530 -570 {lab=IBP_1U[3:1]}
-N 530 -580 600 -580 {lab=IBP_1U[3:1]}
-N 530 -570 530 -560 {lab=IBP_1U[3:1]}
-N 600 -580 690 -580 {lab=IBP_1U[3:1]}
-N 690 -580 690 -570 {lab=IBP_1U[3:1]}
-N 690 -570 690 -560 {lab=IBP_1U[3:1]}
+N 530 -580 530 -570 {lab=IBP_1U[2:0]}
+N 530 -580 600 -580 {lab=IBP_1U[2:0]}
+N 530 -570 530 -560 {lab=IBP_1U[2:0]}
+N 600 -580 690 -580 {lab=IBP_1U[2:0]}
+N 690 -580 690 -570 {lab=IBP_1U[2:0]}
+N 690 -570 690 -560 {lab=IBP_1U[2:0]}
 N 490 -130 530 -130 {lab=VSS}
 N 530 -130 690 -130 {lab=VSS}
 N 200 -130 490 -130 {lab=VSS}
@@ -48,13 +48,13 @@ N 900 -730 900 -270 {lab=VO}
 N 900 -380 930 -380 {lab=VO}
 N 730 -530 750 -530 {lab=VIP}
 N 470 -530 490 -530 {lab=VIN}
-N 620 -590 620 -580 {lab=IBP_1U[3:1]}
+N 620 -590 620 -580 {lab=IBP_1U[2:0]}
 N 360 -760 400 -760 {lab=VDD_1V8}
 N 400 -810 400 -760 {lab=VDD_1V8}
 N 360 -810 360 -790 {lab=VDD_1V8}
 N 360 -730 360 -710 {lab=#net1}
 N 300 -760 320 -760 {lab=PWRUP_1V8}
-N 620 -600 620 -590 {lab=IBP_1U[3:1]}
+N 620 -600 620 -590 {lab=IBP_1U[2:0]}
 N 300 -690 550 -690 {lab=PWRUP_1V8}
 N 800 -760 830 -760 {lab=VDD_1V8}
 N 830 -810 830 -760 {lab=VDD_1V8}
@@ -90,7 +90,7 @@ N 290 -450 300 -450 {lab=PWRUP_N_1V8}
 N 300 -450 300 -180 {lab=PWRUP_N_1V8}
 N 300 -450 790 -450 {lab=PWRUP_N_1V8}
 N 790 -450 790 -180 {lab=PWRUP_N_1V8}
-N 620 -730 620 -600 {lab=IBP_1U[3:1]}
+N 620 -730 620 -600 {lab=IBP_1U[2:0]}
 C {devices/opin.sym} 930 -380 0 0 {name=p1 lab=VO}
 C {devices/ipin.sym} 750 -530 2 0 {name=p2 lab=VIP}
 C {devices/ipin.sym} 470 -530 2 1 {name=p3 lab=VIN}
@@ -100,7 +100,7 @@ C {JNW_ATR_SKY130A/JNWATR_PCH_12C1F2.sym} 490 -530 0 0 {name=xba1[7:0]}
 C {JNW_ATR_SKY130A/JNWATR_PCH_12C1F2.sym} 730 -530 0 1 {name=xbb2[7:0]}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 490 -240 0 0 {name=xca4}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 730 -240 0 1 {name=xcb2}
-C {cborder/border_xs.sym} 270 0 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}
+C {cborder/border_xs.sym} 0 -10 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}
 C {devices/lab_wire.sym} 530 -300 0 0 {name=p8 sig_type=std_logic lab=VD1}
 C {JNW_ATR_SKY130A/JNWATR_PCH_4C5F0.sym} 210 -760 0 1 {name=xba6}
 C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 210 -240 0 1 {name=xca3}

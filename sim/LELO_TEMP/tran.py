@@ -75,9 +75,22 @@ def main(name,show=False):
 
   inl = ycorr - x
 
-  obj["temperature"] = [float(x) for x in x]
-  obj["estimate"] = [float(i) for i in y]
-  obj["freq"] = [float(i) for i in yi]
+  for i in range(0,len(x)):
+      if(x[i] == -40):
+          obj["freq_N40"] = float(yi[i])
+          obj["temp_N40"] = float(y[i])
+      elif(x[i] == 25):
+          obj["freq_25"] = float(yi[i])
+          obj["temp_25"] = float(y[i])
+      elif(x[i] == 125):
+          obj["freq_125"] = float(yi[i])
+          obj["temp_125"] = float(y[i])
+
+
+
+  #obj["temperature"] = [float(x) for x in x]
+  #obj["estimate"] = [float(i) for i in y]
+  #obj["freq"] = [float(i) for i in yi]
   obj["error"] = float(abs(error).max())
   obj["gainerror"] = float(slope)
   obj["offset"] = float(intercept)

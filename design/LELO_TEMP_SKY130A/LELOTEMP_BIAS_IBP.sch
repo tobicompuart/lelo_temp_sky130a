@@ -126,13 +126,13 @@ N 860 -670 890 -670 {lab=PWRUP_N_1V8}
 N 860 -650 890 -650 {lab=PWRUP_1V8}
 N 460 -810 460 -540 {lab=LPI}
 N 410 -250 460 -250 {lab=VDD_1V8}
-N 460 -220 460 -100 {lab=VSS}
 N 460 -380 460 -280 {lab=VS1}
 N 320 -510 420 -510 {lab=PWRUP_1V8}
 N 770 -270 890 -270 {lab=VSS}
 N 460 -410 500 -410 {lab=VSS}
 N 460 -510 500 -510 {lab=VSS}
 N 500 -250 540 -250 {lab=VR1}
+N 460 -220 460 -100 {lab=VSS}
 C {devices/ipin.sym} 300 -970 0 0 {name=p4 lab=VDD_1V8}
 C {devices/ipin.sym} 313.9889709803555 -100 0 0 {name=p5 lab=VSS}
 C {devices/ipin.sym} 860 -810 2 0 {name=p7 lab=LPI}

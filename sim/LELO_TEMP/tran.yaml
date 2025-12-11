@@ -8,3 +8,105 @@
 #  scale: <scale, multiply result by scale>
 #  digits: <significant digits>
 #  unit: Unit
+gainerror:
+  src:
+    - gainerror
+  typ: 1
+  min: 0.95
+  max: 0.95
+  scale: 1
+  digits: 3
+  unit:
+inl:
+  src:
+    - inl
+  typ: 0
+  min: -2
+  max: 2
+  scale: 1
+  digits: 3
+  unit: C
+offset:
+  src:
+    - offset
+  typ: 0
+  min: -2
+  max: 2
+  scale: 1
+  digits: 3
+  unit: C
+freq_N40:
+  src:
+    - freq_N40
+  typ: 2
+  min: -10%
+  max: 10%
+  scale: 1e-6
+  digits: 3
+  unit: MHz
+freq_25 :
+  src:
+    - freq_25
+  typ: 3
+  min: -10%
+  max: 10%
+  scale: 1e-6
+  digits: 3
+  unit: MHz
+freq_125:
+  src:
+    - freq_125
+  typ: 4
+  min: -10%
+  max: 10%
+  scale: 1e-6
+  digits: 3
+  unit: MHz
+temp_N40:
+  src:
+    - temp_N40
+  typ: -40
+  desc: Estimated
+  min: -41
+  max: -39
+  scale: 1
+  digits: 3
+  unit: C
+temp_25:
+  src:
+    - temp_25
+  typ: 25
+  desc: Estimated
+  min: -24
+  max: 26
+  scale: 1
+  digits: 3
+  unit: C
+temp_125:
+  src:
+    - temp_125
+  typ: 125
+  desc: Estimated
+  min: 124
+  max: 126
+  scale: 1
+  digits: 3
+  unit: C
+idd:
+  src:
+    - idd_25
+  typ: 30
+  min: 5
+  max: 60
+  scale: -1e6
+  digits: 3
+  unit: uA
+iddq:
+  src:
+    - iddq_25
+  typ: 10
+  min: 0
+  max: 50
+  scale: -1e9
+  digits: 3
+  unit: nA

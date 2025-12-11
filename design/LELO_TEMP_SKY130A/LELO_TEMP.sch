@@ -35,12 +35,6 @@ N 180 -620 180 -520 {lab=IBP_1U[0]}
 N 350 -600 430 -600 {lab=VC}
 N 1080 -670 1120 -670 {lab=#net2}
 N 1180 -580 1180 -530 {lab=VSS}
-N 970 -610 990 -610 {lab=#net3}
-N 870 -610 890 -610 {lab=CLK}
-N 930 -650 1030 -650 {lab=VDD_1V8}
-N 830 -650 930 -650 {lab=VDD_1V8}
-N 830 -570 930 -570 {lab=VSS}
-N 930 -570 1030 -570 {lab=VSS}
 N 1180 -750 1180 -700 {lab=VDD_1V8}
 N 1180 -750 1220 -750 {lab=VDD_1V8}
 N 1150 -580 1150 -530 {lab=VDD_1V8}
@@ -61,24 +55,15 @@ N 400 -280 400 -220 {lab=PWRUP_N_1V8}
 N 400 -280 510 -280 {lab=PWRUP_N_1V8}
 N 520 -690 520 -670 {lab=PWRUP_B_1V8}
 N 540 -690 540 -670 {lab=PWRUP_N_1V8}
-N 560 -690 560 -670 {lab=IBP_1U[1]}
+N 560 -690 560 -670 {lab=IBP_1U[3:1]}
 N 660 -610 690 -610 {lab=CMPO}
-N 980 -490 1000 -490 {lab=#net4}
-N 1080 -490 1100 -490 {lab=#net5}
-N 940 -530 1040 -530 {lab=VDD_1V8}
-N 380 -490 900 -490 {lab=RST}
-N 700 -430 940 -430 {lab=VSS}
-N 950 -750 1120 -610 {lab=CLK}
-N 880 -750 950 -750 {lab=CLK}
-N 880 -750 880 -610 {lab=CLK}
-N 1070 -610 1090 -610 {lab=#net5}
-N 1090 -610 1090 -490 {lab=#net5}
+N 870 -610 940 -610 {lab=RST}
 N 700 -430 700 -420 {lab=VSS}
-N 1040 -450 1040 -430 {lab=VSS}
-N 940 -430 1040 -430 {lab=VSS}
-N 940 -450 940 -430 {lab=VSS}
 N 100 -880 430 -880 {lab=VDD_1V8}
 N 700 -880 1170 -880 {lab=VDD_1V8}
+N 880 -610 880 -490 {lab=RST}
+N 380 -490 880 -490 {lab=RST}
+N 940 -610 1120 -610 {lab=RST}
 C {cborder/border_xs.sym} 150 -160 0 0 { user="wulff" company="wulff"}
 C {devices/ipin.sym} 100 -880 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} 100 -220 0 0 {name=p2 lab=VSS}
@@ -89,7 +74,7 @@ C {devices/lab_wire.sym} 840 -300 0 0 {name=p8 sig_type=std_logic lab=LPI}
 C {devices/lab_wire.sym} 840 -260 0 0 {name=p9 sig_type=std_logic lab=VC}
 C {devices/lab_wire.sym} 840 -320 0 1 {name=p10 sig_type=std_logic lab=IBP_1U[3:0]}
 C {JNW_TR_SKY130A/JNWTR_CAPX1.sym} 170 -510 2 1 {name=xd1[9:0]}
-C {JNW_ATR_SKY130A/JNWATR_NCH_4C1F2.sym} 380 -490 0 1 {name=xg3[1:0]}
+C {JNW_ATR_SKY130A/JNWATR_NCH_4C5F0.sym} 380 -490 0 1 {name=xg3[1:0]}
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 690 -610 0 0 {name=x7 }
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 790 -610 0 0 {name=x8 }
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 1210 -840 0 1 {name=x10 }
@@ -98,8 +83,6 @@ C {devices/lab_wire.sym} 270 -520 0 0 {name=p14 sig_type=std_logic lab=IBP_1U[0]
 C {devices/lab_wire.sym} 350 -600 0 0 {name=p15 sig_type=std_logic lab=VC}
 C {devices/lab_wire.sym} 410 -430 0 0 {name=p16 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 1180 -530 0 1 {name=p18 sig_type=std_logic lab=VSS}
-C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 890 -610 0 0 {name=x11 }
-C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 990 -610 0 0 {name=x12 }
 C {devices/lab_wire.sym} 1220 -750 0 1 {name=p19 sig_type=std_logic lab=VDD_1V8}
 C {JNW_TR_SKY130A/JNWTR_DFRNQNX1_CV.sym} 1120 -610 0 0 {name=x9 }
 C {devices/lab_wire.sym} 1150 -530 1 1 {name=p17 sig_type=std_logic lab=VDD_1V8}
@@ -119,7 +102,4 @@ C {LELO_TEMP_SKY130A/LELOTEMP_CMP.sym} 580 -610 0 0 {name=x3}
 C {devices/lab_wire.sym} 560 -690 1 0 {name=p23 sig_type=std_logic lab=IBP_1U[3:1]}
 C {devices/lab_wire.sym} 670 -610 1 0 {name=p24 sig_type=std_logic lab=CMPO}
 C {devices/lab_wire.sym} 530 -490 1 0 {name=p25 sig_type=std_logic lab=RST}
-C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 1080 -490 0 1 {name=x4 }
-C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 980 -490 0 1 {name=x5 }
-C {devices/lab_wire.sym} 970 -530 0 1 {name=p26 sig_type=std_logic lab=VDD_1V8}
-C {devices/lab_wire.sym} 900 -750 0 1 {name=p27 sig_type=std_logic lab=CLK}
+C {devices/lab_wire.sym} 930 -610 0 1 {name=p27 sig_type=std_logic lab=CLK}
