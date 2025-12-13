@@ -73,7 +73,6 @@ N 380 -490 680 -490 {lab=RST}
 N 720 -530 920 -530 {lab=VDD_1V8}
 N 920 -530 1020 -530 {lab=VDD_1V8}
 N 920 -450 1020 -450 {lab=VSS}
-C {cborder/border_xs.sym} 150 -160 0 0 { user="wulff" company="wulff"}
 C {devices/ipin.sym} 100 -880 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} 100 -220 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} 100 -300 0 0 {name=p3 lab=PWRUP_1V8}
@@ -117,5 +116,4 @@ C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 960 -490 0 1 {name=x3 }
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 860 -490 0 1 {name=x4 }
 C {JNW_TR_SKY130A/JNWTR_IVX1_CV.sym} 760 -490 0 1 {name=x5 }
 C {devices/lab_wire.sym} 700 -570 0 0 {name=p11 sig_type=std_logic lab=VSS}
-C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 980 -310 1 0 {name=xac2}
-C {JNW_TR_SKY130A/JNWTR_RPPO8.sym} 980 -410 1 0 {name=xac3}
+C {cborder/border_xs.sym} 140 -130 0 0 {company="Carsten Wulff Software" user="wulff" }

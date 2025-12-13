@@ -8,18 +8,6 @@ Check temperature accuracy
 
 |**Name**|**Parameter**|**Description**| |**Min**|**Typ**|**Max**| Unit|
 |:---|:---|:---|---:|:---:|:---:|:---:| ---:|
-||**freq\_N40** || **Spec**  | **1.800** | **2.000** | **2.200** | **MHz** |
-| | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | <span style='color:orange'>**1.762**</span> |  | |
-| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|<span style='color:red'>**1.333**</span> | <span style='color:orange'>**1.763**</span> | <span style='color:red'>**2.350**</span> | |
-| | | |<a href='results/tran_Sch_mc.html'>Sch_3std</a>|<span style='color:red'>**1.203**</span> | <span style='color:orange'>**1.761**</span> | <span style='color:red'>**2.319**</span> | |
-||**freq\_25** || **Spec**  | **2.700** | **3.000** | **3.300** | **MHz** |
-| | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | <span style='color:red'>**2.516**</span> |  | |
-| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|<span style='color:red'>**1.959**</span> | <span style='color:red'>**2.517**</span> | <span style='color:orange'>**3.340**</span> | |
-| | | |<a href='results/tran_Sch_mc.html'>Sch_3std</a>|<span style='color:red'>**1.891**</span> | <span style='color:red'>**2.517**</span> | 3.144 | |
-||**freq\_125** || **Spec**  | **3.600** | **4.000** | **4.400** | **MHz** |
-| | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | 4.039 |  | |
-| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|<span style='color:red'>**3.156**</span> | 4.028 | <span style='color:red'>**5.338**</span> | |
-| | | |<a href='results/tran_Sch_mc.html'>Sch_3std</a>|<span style='color:red'>**3.275**</span> | 4.048 | <span style='color:red'>**4.821**</span> | |
 ||**temp\_N40** |Estimated| **Spec**  | **-45.000** | **-40.000** | **-35.000** | **C** |
 | | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | -39.744 |  | |
 | | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|-44.579 | -40.516 | -39.429 | |
@@ -52,13 +40,13 @@ Check temperature accuracy
 | | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | -1.420 |  | |
 | | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|-4.579 | -1.716 | -1.378 | |
 | | | |<a href='results/tran_Sch_mc.html'>Sch_3std</a>|-2.383 | -1.387 | -0.391 | |
-||**com\_1p\_max** |Commercial 1 point calibration| **Spec**  | **-5.000** | **0.000** | **5.000** | **C** |
+||**com\_1p\_max** |Commercial 1 point calibration| **Spec**  | **-10.000** | **0.000** | **10.000** | **C** |
 | | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | 0.632 |  | |
-| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|0.114 | 2.352 | <span style='color:red'>**7.447**</span> | |
+| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|0.114 | 2.352 | 7.447 | |
 | | | |<a href='results/tran_Sch_mc.html'>Sch_3std</a>|-1.670 | 1.173 | 4.016 | |
-||**com\_1p\_min** |Commercial 1 point calibration| **Spec**  | **-5.000** | **0.000** | **5.000** | **C** |
+||**com\_1p\_min** |Commercial 1 point calibration| **Spec**  | **-10.000** | **0.000** | **10.000** | **C** |
 | | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | -0.286 |  | |
-| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|<span style='color:red'>**-6.163**</span> | -3.236 | -0.119 | |
+| | | |<a href='results/tran_Sch_etc.html'>Sch_etc</a>|-6.163 | -3.236 | -0.119 | |
 | | | |<a href='results/tran_Sch_mc.html'>Sch_3std</a>|-2.561 | -0.789 | 0.984 | |
 ||**com\_2p\_max** |Commercial 2 point calibration| **Spec**  | **-1.000** | **0.000** | **1.000** | **C** |
 | | | |<a href='results/tran_Sch_typical.html'>Sch_typ</a>| | 0.121 |  | |

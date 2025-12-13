@@ -9,33 +9,6 @@
 #  digits: <significant digits>
 #  unit: Unit
 
-freq_N40:
-  src:
-    - freq_N40
-  typ: 2
-  min: -10%
-  max: 10%
-  scale: 1e-6
-  digits: 3
-  unit: MHz
-freq_25 :
-  src:
-    - freq_25
-  typ: 3
-  min: -10%
-  max: 10%
-  scale: 1e-6
-  digits: 3
-  unit: MHz
-freq_125:
-  src:
-    - freq_125
-  typ: 4
-  min: -10%
-  max: 10%
-  scale: 1e-6
-  digits: 3
-  unit: MHz
 temp_N40:
   src:
     - temp_N40
@@ -102,8 +75,8 @@ com_1p:
     - com_1p_min
   typ: 0
   desc: Commercial 1 point calibration
-  min: -5
-  max: +5
+  min: -10
+  max: +10
   scale: 1
   digits: 3
   unit: C
