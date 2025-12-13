@@ -1,4 +1,4 @@
-v {xschem version=3.4.6 file_version=1.2}
+v {xschem version=3.4.7 file_version=1.2}
 G {}
 K {}
 V {}
@@ -27,10 +27,6 @@ N 870 -410 980 -410 {
 lab=VR1}
 N 800 -780 840 -780 {
 lab=LPO}
-N 640 -860 640 -410 {
-lab=VD1}
-N 980 -860 980 -470 {
-lab=VR1}
 N 800 -810 830 -810 {
 lab=LPI}
 N 290 -970 310 -970 {
@@ -73,7 +69,7 @@ N 890 -850 1140 -850 {
 lab=LPI}
 N 890 -890 890 -850 {
 lab=LPI}
-N 1180 -790 1250 -790 {
+N 1180 -750 1250 -750 {
 lab=IBP_1U[3:0]}
 N 830 -560 830 -510 {
 lab=VDD_1V8}
@@ -85,7 +81,6 @@ N 790 -560 790 -480 {
 lab=VD1}
 N 980 -330 980 -310 {lab=#net1}
 N 890 -270 960 -270 {lab=VSS}
-N 1180 -860 1180 -790 {lab=IBP_1U[3:0]}
 N 460 -480 460 -440 {lab=VS2}
 N 790 -900 790 -890 {lab=LPI}
 N 680 -830 680 -810 {lab=LPI}
@@ -133,11 +128,26 @@ N 460 -410 500 -410 {lab=VSS}
 N 460 -510 500 -510 {lab=VSS}
 N 500 -250 540 -250 {lab=VR1}
 N 460 -220 460 -100 {lab=VSS}
+N 860 -690 890 -690 {lab=VCP}
+N 1180 -860 1180 -810 {lab=IBD[3:0]}
+N 1180 -780 1220 -780 {lab=VDD_1V8}
+N 1220 -890 1220 -780 {lab=VDD_1V8}
+N 980 -780 1010 -780 {lab=VDD_1V8}
+N 1010 -890 1010 -780 {lab=VDD_1V8}
+N 980 -860 980 -810 {lab=VBD2}
+N 980 -750 980 -470 {lab=VR1}
+N 640 -860 640 -790 {lab=VBD1}
+N 600 -760 640 -760 {lab=VDD_1V8}
+N 600 -890 600 -760 {lab=VDD_1V8}
+N 640 -730 640 -410 {lab=VD1}
+N 940 -780 940 -750 {lab=VCP}
+N 1140 -780 1140 -750 {lab=VCP}
+N 680 -760 680 -730 {lab=VCP}
 C {devices/ipin.sym} 300 -970 0 0 {name=p4 lab=VDD_1V8}
 C {devices/ipin.sym} 313.9889709803555 -100 0 0 {name=p5 lab=VSS}
 C {devices/ipin.sym} 860 -810 2 0 {name=p7 lab=LPI}
 C {devices/opin.sym} 860 -780 0 0 {name=p8 lab=LPO}
-C {devices/opin.sym} 1250 -790 0 0 {name=p9 lab=IBP_1U[3:0]}
+C {devices/opin.sym} 1250 -750 0 0 {name=p9 lab=IBP_1U[3:0]}
 C {devices/lab_pin.sym} 640 -370 0 1 {name=l2 sig_type=std_logic lab=VD1}
 C {devices/lab_pin.sym} 980 -220 0 1 {name=l4 sig_type=std_logic lab=VD2}
 C {devices/lab_pin.sym} 980 -430 0 1 {name=l5 sig_type=std_logic lab=VR1}
@@ -168,3 +178,13 @@ C {devices/lab_pin.sym} 410 -250 0 0 {name=l8 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_pin.sym} 500 -510 0 1 {name=l9 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 500 -410 0 1 {name=l12 sig_type=std_logic lab=VSS}
 C {devices/lab_pin.sym} 540 -250 0 1 {name=l13 sig_type=std_logic lab=VR1}
+C {devices/lab_pin.sym} 890 -690 0 1 {name=l14 sig_type=std_logic lab=VCP}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C1F2.sym} 1140 -780 0 0 {name=xca2[3:0]}
+C {devices/lab_pin.sym} 1180 -830 0 0 {name=l15 sig_type=std_logic lab=IBD[3:0]}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C1F2.sym} 940 -780 0 0 {name=xca4}
+C {JNW_ATR_SKY130A/JNWATR_PCH_4C1F2.sym} 680 -760 0 1 {name=xca5[7:0]}
+C {devices/lab_pin.sym} 940 -750 1 1 {name=l16 sig_type=std_logic lab=VCP}
+C {devices/lab_pin.sym} 1140 -750 1 1 {name=l17 sig_type=std_logic lab=VCP}
+C {devices/lab_pin.sym} 680 -730 1 1 {name=l18 sig_type=std_logic lab=VCP}
+C {devices/lab_pin.sym} 640 -840 0 0 {name=l19 sig_type=std_logic lab=VBD1}
+C {devices/lab_pin.sym} 980 -840 0 0 {name=l20 sig_type=std_logic lab=VBD2}

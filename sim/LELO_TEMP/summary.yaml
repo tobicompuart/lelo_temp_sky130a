@@ -1,9 +1,9 @@
-description: TB_NCM
+description: LELO_TEMP
 simulations:
    tran:
-    name: Transient analysis
+    name: Temperature sensor
     description: |
-      Check transient operation
+      Check temperature accuracy
     data:
       - name: Sch_typ
         src: results/tran_Sch_typical

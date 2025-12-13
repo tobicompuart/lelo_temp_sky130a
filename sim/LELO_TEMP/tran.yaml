@@ -8,33 +8,7 @@
 #  scale: <scale, multiply result by scale>
 #  digits: <significant digits>
 #  unit: Unit
-gainerror:
-  src:
-    - gainerror
-  typ: 1
-  min: 0.95
-  max: 0.95
-  scale: 1
-  digits: 3
-  unit:
-inl:
-  src:
-    - inl
-  typ: 0
-  min: -2
-  max: 2
-  scale: 1
-  digits: 3
-  unit: C
-offset:
-  src:
-    - offset
-  typ: 0
-  min: -2
-  max: 2
-  scale: 1
-  digits: 3
-  unit: C
+
 freq_N40:
   src:
     - freq_N40
@@ -67,18 +41,8 @@ temp_N40:
     - temp_N40
   typ: -40
   desc: Estimated
-  min: -41
-  max: -39
-  scale: 1
-  digits: 3
-  unit: C
-temp_25:
-  src:
-    - temp_25
-  typ: 25
-  desc: Estimated
-  min: -24
-  max: 26
+  min: -45
+  max: -35
   scale: 1
   digits: 3
   unit: C
@@ -87,8 +51,8 @@ temp_125:
     - temp_125
   typ: 125
   desc: Estimated
-  min: 124
-  max: 126
+  min: 120
+  max: 130
   scale: 1
   digits: 3
   unit: C
@@ -110,3 +74,47 @@ iddq:
   scale: -1e9
   digits: 3
   unit: nA
+ind_1p:
+  src:
+    - ind_1p_max
+    - ind_1p_min
+  typ: 0
+  desc: Industrial 1 point calibration
+  min: -10
+  max: +10
+  scale: 1
+  digits: 3
+  unit: C
+ind_2p:
+  src:
+    - ind_2p_max
+    - ind_2p_min
+  typ: 0
+  desc: Industrial 2 point calibration
+  min: -5
+  max: +5
+  scale: 1
+  digits: 3
+  unit: C
+com_1p:
+  src:
+    - com_1p_max
+    - com_1p_min
+  typ: 0
+  desc: Commercial 1 point calibration
+  min: -5
+  max: +5
+  scale: 1
+  digits: 3
+  unit: C
+com_2p:
+  src:
+    - com_2p_max
+    - com_2p_min
+  typ: 0
+  desc: Commercial 2 point calibration
+  min: -1
+  max: +1
+  scale: 1
+  digits: 3
+  unit: C

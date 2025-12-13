@@ -10,14 +10,12 @@ import re
 import os
 import sys
 
-def calcDeltaVc(temperature):
-    T0 = 273.15
-    N = 8*8
-    k_q = const.k/const.e
-    delta_v = k_q*(T0+temperature)*np.log(N)
-    return delta_v
 
-def calcCurrent(temperature,compensate=False):
+
+def getEll():
+    return 2.34
+
+def getR(temperature):
     R = 7.535e3*(8+4)
     T0 = 273.15
 
@@ -27,11 +25,33 @@ def calcCurrent(temperature,compensate=False):
     res_d_dtemp = (res_125 - res_n25)/(125-25)
 
     R_tcomp = (R + (res_d_dtemp)*(temperature - 25))
+    return R_tcomp
+
+def getC():
+    return 53e-15*10
+
+def calcTKelvinFromFreq(freq,temperature=25):
+    #- f = 2/RC*DeltaV/Vc
+    deltaV_Vc = freq/2*getR(temperature)*getC()
+    deltaV = deltaV_Vc*calcVc(temperature)
+    #- deltaV = kT/q*ln(64)
+    T = deltaV*k_q
+    return deltaV
+
+
+def calcDeltaV(temperature):
+    T0 = 273.15
+    N = 8*8
+    k_q = const.k/const.e
+    delta_v = k_q*(T0+temperature)*np.log(N)
+    return delta_v
+
+def calcCurrent(temperature,compensate=False):
 
     #- boltzman/unit charge
     k_q = const.k/const.e
 
-    id = calcDeltaVc(temperature)/R_tcomp
+    id = calcDeltaV(temperature)/getR(temperature)
 
     return id
 
@@ -40,23 +60,23 @@ def calcVc(temperature):
 
     T0 = 273.15
     k_q = const.k/const.e
-    vc = k_q*(T0 + temperature)*(2.35 - 3*np.log(T0 + temperature)) + 1.12
+    vc = k_q*(T0 + temperature)*(getEll() - 3*np.log(T0 + temperature)) + 1.12
     return vc
 
 def calcFreq(temperature,compensate=False):
-    C = 53e-15*10
+
     id = calcCurrent(temperature,compensate=compensate)
 
-    freq = id/(C*calcVc(temperature))
+    freq = id/(getC()*calcVc(temperature))
 
     return freq
 
 
 
 def main(name,show=False):
-    sys.path.append(".")
+    sys.path.append("./design/LELO_TEMP_SKY130A/")
     #- Get the model for calculating the temperature from the frequency
-    from sim.LELO_TEMP.tran import calcTemperatureFromFreq 
+    import LELO_TEMP as lt
 
     x = np.arange(-40,125,5)
 
@@ -76,12 +96,9 @@ def main(name,show=False):
     freq = calcFreq(x)
 
     ax[0].plot(x,freq,label="Frequency")
-    y1 = calcTemperatureFromFreq(freq)
+    y1 = lt.KelvinFromFreq(freq)
     ax[1].plot(x,y1,label="Calc raw")
-    y = calcTemperatureFromFreq(freq,compensate=True)
-    ax[1].plot(x,y,label="Calc rescomp")
     ax[1].plot(x,x,label="Ideal")
-    ax[2].plot(x,y-x,label="Error")
     ax[2].plot(x,y1-x,label="Error, no comp")
     if(havesim):
         ax[0].plot(temp,freqsim,label="Simulated Frequency")
