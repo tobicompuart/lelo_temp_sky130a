@@ -17,3 +17,8 @@ jnw_tr_sky130a:
 jnw_atr_sky130a:
   remote: git@github.com:analogicus/jnw_atr_sky130A.git
   revision: main
+
+#- Analog transistor library
+jnw_bias_sky130a:
+  remote: git@github.com:analogicus/jnw_bias_sky130A.git
+  revision: main
