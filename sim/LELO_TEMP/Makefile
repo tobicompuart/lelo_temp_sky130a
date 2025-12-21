@@ -12,11 +12,13 @@ LIB =LELO_TEMP_SKY130A
 OPT=
 
 all:
+#- Run calibration corners
+	${MAKE} process TB=calibrate
+	${MAKE} mc TB=calibrate
+#- Run corners
 	${MAKE} typical
 	${MAKE} etc
-	${MAKE} supply
 	${MAKE} mc
-	${MAKE} rc
 
 include ../../tech/make/sim.make
 
@@ -49,7 +51,10 @@ tfs: netlist
 	cicsim run --replace replace.yaml --name ${VIEW}_tfs ${TB} ${OPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt" "Vt,Vl,Vh"
 
 etc: netlist
-	cicsim run --replace replace.yaml --name ${VIEW}_etc ${TB} ${OPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Tt" "Vl,Vh"
+	cicsim run --replace replace.yaml --name ${VIEW}_etc ${TB} ${OPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs,Khh,Kll" "Tt" "Vt,Vl,Vh"
+
+process: netlist
+	cicsim run --replace replace.yaml --name ${VIEW}_etc ${TB} ${OPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs,Khh,Kll" "Tt" "Vt"
 
 mc: netlist
 	cicsim run --replace replace.yaml --name ${VIEW}_mc --count 30 ${TB} ${OPT} ${VIEW} Gt "Kttmm" "Tt" "Vt"

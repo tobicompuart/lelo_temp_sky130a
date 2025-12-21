@@ -9,26 +9,7 @@
 #  digits: <significant digits>
 #  unit: Unit
 
-temp_N40:
-  src:
-    - temp_N40
-  typ: -40
-  desc: Estimated
-  min: -45
-  max: -35
-  scale: 1
-  digits: 3
-  unit: C
-temp_125:
-  src:
-    - temp_125
-  typ: 125
-  desc: Estimated
-  min: 120
-  max: 130
-  scale: 1
-  digits: 3
-  unit: C
+
 idd:
   src:
     - idd_25
