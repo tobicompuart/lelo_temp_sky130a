@@ -10,7 +10,8 @@ fl:
 	echo "//Automatic include file" > tb.fl
 	cat "../../design/${LIB}/${CELL}.fl" | xargs -I{} echo "../../design/${LIB}/{}">> tb.fl
 	#echo "counter.v" >> tb.fl
-	echo "temp_osc_controller.v" >> tb.fl
+	#echo "temp_osc_controller.v" >> tb.fl
+	echo "temp_osc_measure.v" >> tb.fl
 	echo "tb.v" >> tb.fl
 	-rm tb.csv
 

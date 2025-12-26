@@ -42,7 +42,6 @@ module test;
 
    //- Default temperature
    integer  temperature;
-
    wire pwrup;   
    wire osc_clk;
    
@@ -59,14 +58,17 @@ module test;
 
 
    wire[7:0] delta;
-   wire delta_valid;
+   wire [9:0] cycles;
+   logic start;
+   wire  done;
 
    temp_osc_measure u1_count (.lf_clk(lf_clk),
+                              .start(start),
    .ana_clk(osc_clk),
    .rst_n(rst_n),
+                              .done(done),
    .ana_en(pwrup),
-   .delta(delta),
-   .delta_valid(delta_valid)
+   .cycles(cycles)
    );
 
    
@@ -81,16 +83,21 @@ module test;
         //- Create a CSV file
         file = $fopen("tb.csv","w");
         $fwrite(file,"temperature,count\n");
+        #10 start = 0;
+
         #10 rst_n = 1;
         #10 rst_n = 0;
         #10 rst_n = 1;
 
-        @(posedge delta_valid);
+        #10 start = 1;
+
+
+        @(posedge done);
 
         //Wait for temperature sweep to continue
         for (temperature=-40;temperature<126;temperature++) begin
-         @(posedge delta_valid)
-         $fwrite(file,"%d,%d\n",temperature,delta );
+         @(posedge done)
+         $fwrite(file,"%d,%d\n",temperature,cycles );
          $display("Temperature =%d",temperature);  
         end
 

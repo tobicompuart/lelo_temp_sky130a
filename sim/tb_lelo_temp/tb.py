@@ -8,15 +8,11 @@ df = pd.read_csv("tb.csv")
 
 fig,ax = plt.subplots(2,1,figsize=(12,6),sharex=True)
 
-aoffset = -130
-boffset = 0
-gain = 1.2
+boffset = -160
+gain = 2
 
-y = (df["count"]+aoffset)*gain + boffset
+y = (df["count"])*gain + boffset
 x = df["temperature"]
-coefficients = np.polyfit(x, y, 1) # '1' indicates a first-degree polynomial (linear)
-slope = coefficients[0]
-intercept = coefficients[1]
 
 ax[0].plot(x,y,label="Simulation")
 ax[0].plot(x,x,label="Ideal curve")
