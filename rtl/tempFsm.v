@@ -27,11 +27,10 @@
 
 
 module tempFsm #(
-                 parameter WIDTH = 10                // Counter resolution
+                 parameter WIDTH = 8                // Counter resolution
                  )(
                    input wire               lfClk, // 32.768 kHz reference
                    input wire               start,
-                   input wire               clkOsc, // Temperature-dependent oscillator
                    input wire               rst_n,
                    input wire [WIDTH-1:0]   count,
                    output logic             resetCount,

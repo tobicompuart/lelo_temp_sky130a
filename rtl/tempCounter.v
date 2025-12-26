@@ -25,8 +25,8 @@
 //
 //====================================================================
 module tempCounter #(
-                 parameter WIDTH = 10
-                 )
+                     parameter WIDTH = 8
+                     )
    (
     input wire               clk,
     input wire               reset,

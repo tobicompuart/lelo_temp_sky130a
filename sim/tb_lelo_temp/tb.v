@@ -63,32 +63,31 @@ module test;
    parameter   WIDTH = 8;
 
    wire [7:0]  delta;
-   wire [WIDTH-1:0]  cycles;
+   wire [WIDTH-1:0] cycles;
    wire [WIDTH-1:0] count;
-   logic       start;
-   wire        done;
-   wire        resetCount;
+   logic            start;
+   wire             done;
+   wire             resetCount;
 
 
    tempCounter  #(.WIDTH(WIDTH)) u1_count (.clk(clkOsc),
-                                 .reset(resetCount),
-                                 .count(count)
-                                 );
+                                           .reset(resetCount),
+                                           .count(count)
+                                           );
 
    tempFsm #(.WIDTH(WIDTH)) u1_fsm  (.lfClk(lfClk),
-                              .start(start),
-                              .clkOsc(clkOsc),
-                              .rst_n(rst_n),
-                              .done(done),
+                                     .start(start),
+                                     .rst_n(rst_n),
+                                     .done(done),
                                      .resetCount(resetCount),
-                              .pwrupOsc(pwrupOsc),
+                                     .pwrupOsc(pwrupOsc),
                                      .count(count),
-                              .cycles(cycles)
-                              );
+                                     .cycles(cycles)
+                                     );
 
 
 
-   integer     file;
+   integer          file;
    initial
      begin
         //- Output a file that can be opened in GTKWave
@@ -111,8 +110,8 @@ module test;
         for (temperature=-40;temperature<126;temperature++) begin
            @(posedge done)
              #(lfclk_period) start = 1;
-             #(lfclk_period) start = 0;
-             $fwrite(file,"%d,%d\n",temperature,cycles );
+           #(lfclk_period) start = 0;
+           $fwrite(file,"%d,%d\n",temperature,cycles );
            $display("Temperature =%d",temperature);
         end
 
