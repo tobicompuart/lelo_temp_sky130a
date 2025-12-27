@@ -14,10 +14,28 @@ Example of a temperature sensor
 
 # How
 
-The principle of operation can be seen in the FSM below. 
+One way to make a temperature sensor is to create a temperature dependent
+oscillator, and then measure the frequency of the oscillator. 
+
+![](system.svg)
+<sub> Figure 0: System overview </sub>
+
+This temperature sensor was made to conform to the specification at [The
+Project: Design a temperature sensor](https://analogicus.com/aic2026/2026/01/09/The-Project.html#the-project-design-a-temperature-sensor).
+
+For more information on the oscillator, see [Schematics](http://analogicus.com/lelo_temp_sky130a/schematic.html).
+
+To measure the frequency of the oscillator we need a frequency reference. One
+reference that is usually available in a MCU system is a 32768 Hz oscillator.
+The reason for that frequency is to accurately be able to count to 1 second with
+a binary counter. 
+
+Assume that we have a 32678 Hz clock (LF_CLK). We can then create a
+finite-state-machine to measure the oscillator. The principle of operation can
+be seen in Figure 1. 
 
 The FSM starts in a IDLE state where a counter is reset. Next the temperature dependent oscillator is
-started, and a number of oscillator pulses are counted. The FSM runs on a 32768 Hz clock (LF_CLK),
+started, and a number of oscillator pulses are counted. The FSM runs on LF_CLK
 and we use the count x LF_CLK to measure the oscillation frequency. 
 
 After one clock period the FSM powers down the oscillator. In the CAPTURE state
@@ -26,7 +44,7 @@ the value of the counter is stored, and the FSM returns to idle.
 ![](sim/tb_lelo_temp/tempFsm.svg)
 <sub>Figure 1: Finite-State Machine of the temperature sensor controller </sub> 
 
-A waveform of the sequence can be seen below. Start=1 transitions the
+A waveform of the sequence can be seen in Figure 2. The signal start asserted transitions the
 finite-state-machine to power up
 the oscillator (pwrupOsc=1), and we can notice the clkOsc counts the clock
 pulses of the oscillator. On the next lfClk the oscillator is shut down and the
@@ -37,15 +55,13 @@ register.
 <sub>Figure 2: Waves from simulation of the oscillator </sub>
 
 
-In the [testbench](sim/tb_lelo_temp/tb.v) I store the cycles, and the current
+In the [testbench](sim/tb_lelo_temp/tb.v) I store the cycles, and the testbench
 temperature to a file, and use [tb.py](sim/tb_lelo_temp/tb.py) to plot the
 transfer function.
 
 There is a second-order non-linearity as can be seen from the figure below. I've
 modeled both the temperature dependent resistor in the bandgap, and the
-apperantly second-order dependence of the diode voltage.
-
-For more information on the oscillator, see [Schematics](http://analogicus.com/lelo_temp_sky130a/schematic.html).
+apparently second-order dependence of the diode voltage.
 
 ![](sim/tb_lelo_temp/verilog.png)
 <sub>Figure 3: Simulation of the verilog model of the oscillator</sub>
@@ -53,7 +69,7 @@ For more information on the oscillator, see [Schematics](http://analogicus.com/l
 # What
 
 | What            | Cell/Name                              |
-|:----------------|:--------------------------------------:|
+|:----------------|:---------------------------------------|
 | Schematic       | design/LELO_TEMP_SKY130A/LELO_TEMP.sch |
 | Layout          | design/LELO_TEMP_SKY130A/LELO_TEMP.mag |
 | Verilog Model   | design/LELO_TEMP_SKY130A/LELO_TEMP.v   |
