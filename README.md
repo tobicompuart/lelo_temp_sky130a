@@ -15,7 +15,15 @@ Example of a temperature sensor
 # How
 
 One way to make a temperature sensor is to create a temperature dependent
-oscillator, and then measure the frequency of the oscillator. 
+oscillator, and then measure the frequency of the oscillator. In Figure 0 we can
+see an overview. 
+
+A bandgap circuit is used to make a current that is proportional to absolute
+temperature ($I_{PTAT}$) and a voltage that is complementary to absolute
+temperature ($V_{CTAT}$). A relaxation oscillator converts the current and
+voltage into a frequency ($f_{OSC}$). A digital finite-state-machine and a
+counter converts the frequency to a digital value that is proportional to
+temperature. 
 
 ![](system.svg)
 
@@ -26,14 +34,13 @@ Project: Design a temperature sensor](https://analogicus.com/aic2026/2026/01/09/
 
 For more information on the oscillator, see [Schematics](http://analogicus.com/lelo_temp_sky130a/schematic.html).
 
-To measure the frequency of the oscillator we need a frequency reference. One
-reference that is usually available in a MCU system is a 32768 Hz oscillator.
-The reason for that frequency is to accurately be able to count to 1 second with
+To measure the frequency of the oscillator we need a frequency reference One
+reference that is usually available in a MCU system is a 32768 Hz oscillator
+($f_{32KI}$ in Figure 0).
+The reason for that specific frequency is to accurately be able to count to 1 second with
 a binary counter. 
 
-Assume that we have a 32678 Hz clock (LF_CLK). We can then create a
-finite-state-machine to measure the oscillator. The principle of operation can
-be seen in Figure 1. 
+The principle of operation of the FSM and counter can be seen in Figure 1. 
 
 The FSM starts in a IDLE state where a counter is reset. Next the temperature dependent oscillator is
 started, and a number of oscillator pulses are counted. The FSM runs on LF_CLK
@@ -44,10 +51,10 @@ the value of the counter is stored, and the FSM returns to idle.
 
 ![](sim/tb_lelo_temp/tempFsm.svg)
 
-<sub>Figure 1: Finite-State Machine of the temperature sensor controller </sub> 
+<sub>Figure 1: Finite-State Machine to control temperature sensor</sub> 
 
-A waveform of the sequence can be seen in Figure 2. The signal start asserted transitions the
-finite-state-machine to power up
+A waveform of the sequence can be seen in Figure 2. When the signal start is
+asserted the FSM transitions to power up
 the oscillator (pwrupOsc=1), and we can notice the clkOsc counts the clock
 pulses of the oscillator. On the next lfClk the oscillator is shut down and the
 counter naturally stops. The value from the oscillator is stored in the cycles
@@ -56,7 +63,6 @@ register.
 ![](sim/tb_lelo_temp/tb.png)
 
 <sub>Figure 2: Waves from simulation of the oscillator </sub>
-
 
 In the [testbench](sim/tb_lelo_temp/tb.v) I store the cycles, and the testbench
 temperature to a file, and use [tb.py](sim/tb_lelo_temp/tb.py) to plot the
