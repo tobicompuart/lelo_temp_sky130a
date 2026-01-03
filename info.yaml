@@ -14,6 +14,7 @@ doc:
       - LELOTEMP_BIAS_IBP
       - LELOTEMP_OTA
       - LELO_TEMP
+      - LELOTEMP_CCMP
       - LELOTEMP_CMP
       - TB_LELO_TEMP
 

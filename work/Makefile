@@ -17,3 +17,7 @@ CELL=LELO_TEMP
 CELLS = LELO_TEMP
 
 include ../tech/make/core.make
+
+
+mag:
+	cicpy sch2mag ${LIB} LELOTEMP_CMP
