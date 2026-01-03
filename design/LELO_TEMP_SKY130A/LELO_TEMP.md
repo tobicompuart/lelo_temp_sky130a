@@ -28,6 +28,8 @@ The $\Delta V$ increases with temperature and $V_C$ decreases with temperature,
 turns out the $\Delta V$ increases faster than $V_C$ drops, so the overall
 gradient is positive.
 
+The estimated frequency is shown in the table below (the table was generated from [model.ipynb](model.ipynb)))
+
 | Temperature [C] | Frequency [MHz] |
 |-----------------|-----------------|
 | -40             | 1.681           |

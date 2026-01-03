@@ -40,7 +40,7 @@ But it is understandable.
 
 See [Diodes](https://analogicus.com/aic2026/2024/10/25/Diodes.html#forward-voltage-temperature-dependence)
 
-Estimated values from the model in [LELO_TEMP.py]() are shown in table below
+Estimated values from the model in [LELO\_TEMP.py](py/LELO_TEMP.py) are shown in table below.
 
 | Temperature [C] | Current [uA] | VD1 [V] | DeltaV [mV] |
 |-----------------|--------------|---------|-------------|
@@ -48,6 +48,7 @@ Estimated values from the model in [LELO_TEMP.py]() are shown in table below
 | 25              | 1.035        | 0.7412  | 106.9       |
 | 125             | 1.347        | 0.5844  | 142.7       |
 
+The table was generated from [model.ipynb](model.ipynb)
 
 The startup circuit on the left side will ensure that the LPI node is pulled
 down when the circuit starts up. The PWRUP will enable the NMOS between LPI and
