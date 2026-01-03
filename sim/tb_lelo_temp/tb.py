@@ -31,6 +31,6 @@ ax[1].set_ylabel("Temperature error [C]")
 ax[0].grid()
 ax[1].grid()
 plt.tight_layout()
-#plt.savefig("verilog.png")
+plt.savefig("verilog.png")
 
 plt.show()
