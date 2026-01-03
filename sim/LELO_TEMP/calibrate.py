@@ -28,7 +28,7 @@ def main(name,corner=None,show=False,ax=None):
 
   x = [25,85]
 
-  clock_periods = 5
+  clock_periods = 4
   y = list()
   for t in x:
     dt = (float(obj[f"t2_{t}"]) - float(obj[f"t1_{t}"]))/clock_periods

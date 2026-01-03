@@ -143,7 +143,7 @@ N 640 -730 640 -410 {lab=VD1}
 N 940 -780 940 -750 {lab=VCP}
 N 1140 -780 1140 -750 {lab=VCP}
 N 680 -760 680 -730 {lab=VCP}
-N 460 -900 460 -860 {lab=VCP}
+N 970 -890 980 -890 {lab=VDD_1V8}
 C {devices/ipin.sym} 300 -970 0 0 {name=p4 lab=VDD_1V8}
 C {devices/ipin.sym} 313.9889709803555 -100 0 0 {name=p5 lab=VSS}
 C {devices/ipin.sym} 860 -810 2 0 {name=p7 lab=LPI}
@@ -189,5 +189,3 @@ C {devices/lab_pin.sym} 1140 -750 1 1 {name=l17 sig_type=std_logic lab=VCP}
 C {devices/lab_pin.sym} 680 -730 1 1 {name=l18 sig_type=std_logic lab=VCP}
 C {devices/lab_pin.sym} 640 -840 0 0 {name=l19 sig_type=std_logic lab=VBD1}
 C {devices/lab_pin.sym} 980 -840 0 0 {name=l20 sig_type=std_logic lab=VBD2}
-C {JNW_TR_SKY130A/JNWTR_CAPX1.sym} 460 -960 2 1 {name=xd5}
-C {devices/lab_pin.sym} 460 -860 2 1 {name=l21 sig_type=std_logic lab=VCP}

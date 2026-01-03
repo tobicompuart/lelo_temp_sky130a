@@ -28,7 +28,7 @@ def main(name,corner=None,show=False,ax=None,redColor="red",blueColor="blue"):
   x = np.array([int(i) for i in re.split(r"\s+",replace["temperatures"])])
 
   y = list()
-  clock_periods = 5
+  clock_periods = 4
   for t in x:
     print(f"INFO: {t} {obj[f"t2_{t}"]} {obj[f"t1_{t}"]}")
     dt = (float(obj[f"t2_{t}"]) - float(obj[f"t1_{t}"]))/clock_periods
@@ -116,8 +116,8 @@ def main(name,corner=None,show=False,ax=None,redColor="red",blueColor="blue"):
   ax[0][1].grid(True)  
   ax[1][0].grid(True)  
   ax[1][1].grid(True)
-  ax[1][0].set_ylim(-5,5)
-  ax[1][1].set_ylim(-5,5)
+  ax[1][0].set_ylim(-15,15)
+  ax[1][1].set_ylim(-15,15)
  # ax[2].grid(True)
   #ax[3].grid(True)
   #- Use font size small for the legend with multiple columns

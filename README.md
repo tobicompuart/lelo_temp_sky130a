@@ -34,11 +34,12 @@ Project: Design a temperature sensor](https://analogicus.com/aic2026/2026/01/09/
 
 For more information on the oscillator, see [Schematics](http://analogicus.com/lelo_temp_sky130a/schematic.html).
 
-To measure the frequency of the oscillator we need a frequency reference One
+To measure the frequency of the oscillator we need a frequency reference. One
 reference that is usually available in a MCU system is a 32768 Hz oscillator
 ($f_{32KI}$ in Figure 0).
 The reason for that specific frequency is to accurately be able to count to 1 second with
-a binary counter. 
+a binary counter, and apparently to have a frequency for the crystal that is
+higher than 20 kHz, so we can't hear it (according to <https://youtu.be/_2By2ane2I4?si=8ltUNqAPL71zCQUW>).
 
 The principle of operation of the FSM and counter can be seen in Figure 1. 
 
@@ -68,9 +69,10 @@ In the [testbench](sim/tb_lelo_temp/tb.v) I store the cycles, and the testbench
 temperature to a file, and use [tb.py](sim/tb_lelo_temp/tb.py) to plot the
 transfer function.
 
-There is a second-order non-linearity as can be seen from the figure below. I've
-modeled both the temperature dependent resistor in the bandgap, and the
-apparently second-order dependence of the diode voltage.
+I use a physical model of the oscillator ([LELO_TEMP.py](py/LELO_TEMP.py)) to
+create a function to turn the frequency back to a temperature. It can be seen
+that the frequency has a non-zero second order derivative, and thus, the shape
+of the curve needs to be compensated for. See the python model for details.
 
 ![](sim/tb_lelo_temp/verilog.png)
 

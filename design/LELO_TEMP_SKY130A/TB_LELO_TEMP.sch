@@ -12,8 +12,8 @@ ypos2=2
 divy=5
 subdivy=4
 unity=1
-x1=2.3686355e-06
-x2=3.2074963e-06
+x1=-9e-07
+x2=5.1e-06
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -41,7 +41,7 @@ divy=5
 subdivy=4
 unity=1
 x1=0
-x2=4e-06
+x2=6e-06
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -67,7 +67,7 @@ divy=5
 subdivy=4
 unity=1
 x1=0
-x2=4e-06
+x2=6e-06
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -78,20 +78,21 @@ logx=0
 logy=0
 rawfile=$netlist_dir/TB_LELO_TEMP_tran.raw
 legend=1
-color="15 4 12"
+color="15 4 12 10"
 node="xdut.lpi
 xdut.vc
-pwrup_1v8"}
+pwrup_1v8
+xdut.x1_ibp.vcp"}
 B 2 60 -250 860 150 {flags=graph
-y1=-0.15679861
-y2=2.3142014
+y1=-0.017
+y2=1.9
 ypos1=0
 ypos2=2
 divy=5
 subdivy=4
 unity=1
 x1=0
-x2=4e-06
+x2=6e-06
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -103,8 +104,8 @@ logy=0
 rawfile=$netlist_dir/TB_LELO_TEMP_tran.raw
 legend=1
 color="4 10"
-node="xdut.rst_a
-xdut.rst_b"
+node="osc_temp_1v8
+pwrup_1v8"
 autoload=1}
 B 2 -828.9155212205286 -720 -28.9155212205286 -320 {flags=graph
 y1=0.62
@@ -115,7 +116,7 @@ divy=5
 subdivy=4
 unity=1
 x1=0
-x2=4e-06
+x2=6e-06
 divx=5
 subdivx=4
 xlabmag=1.0
@@ -149,25 +150,26 @@ C {devices/code_shown.sym} -1200 -380 0 0 {name=s1 only_toplevel=false value="
 .param mc_mm_switch=0
 .param mc_pr_switch=0
 
-.lib "../../../tech/ngspice/temperature.spi" Tt
+.lib "../../../tech/ngspice/temperature.spi" Th
 .lib "../../../tech/ngspice/corners.spi" Ktt
 .lib "../../../tech/ngspice/supply.spi" Vt
 .include ../../../../cpdk/ngspice/ideal_circuits.spi
 
+.option SEED=1
 .option savecurrents
 .save all
 .control
 optran 0 0 0 10n 1u 0
 
 
-tran 0.5n 4u
+tran 0.5n 6u
 write TB_LELO_TEMP_tran.raw
 
 exit
 .endc
 
 "}
-C {devices/launcher.sym} -170 80 0 0 {name=h5
+C {devices/launcher.sym} -170 90 0 0 {name=h5
 descr="load waves" 
 tclcommand="xschem raw_read $netlist_dir/TB_LELO_TEMP_tran.raw tran"
 }
