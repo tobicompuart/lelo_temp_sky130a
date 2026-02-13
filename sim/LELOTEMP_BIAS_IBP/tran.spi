@@ -1,4 +1,4 @@
-*TB_SUN_TR_SKY130NM/TB_NCM
+* LELOTEMP_BIAS_IBP transient testbench — hand-drawn simplified PTAT circuit
 *----------------------------------------------------------------
 * Include
 *----------------------------------------------------------------
@@ -17,31 +17,38 @@
 * PARAMETERS
 *-----------------------------------------------------------------
 .param TRF = 10p
-
 .param AVDD = {vdda}
+
+*-----------------------------------------------------------------
+* Initial conditions (no startup; use .ic for convergence)
+*-----------------------------------------------------------------
+.ic v(vd1)=0.7
+.ic v(lpo)=0.75
 
 *-----------------------------------------------------------------
 * FORCE
 *-----------------------------------------------------------------
-VSS  VSS  0     dc 0
-VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
-VPWR  PWRUP_1V8  VSS  pwl 0 0 {t_start} 0 {{t_start}-1n} {AVDD}
-VPWRN  PWRUP_N_1V8  VSS  pwl 0 {AVDD} {t_start} {AVDD} {{t_start}-1n} {0}
+VSS   VSS   0        dc 0
+VDD   VDD_1V8 VSS    pwl 0 0 10n {AVDD}
+VPWR  PWRUP_1V8 VSS  pwl 0 0 999n 0 1u {AVDD}
+VPWRN PWRUP_N_1V8 VSS pwl 0 {AVDD} 999n {AVDD} 1u 0
 
-V0 IBP_1U<0> 0 dc 0.5
+* Single PTAT output: IBP_1U[3:0] is one node in hand-drawn circuit; same bias on all pins
+V0 IBP_1U<0> 0 dc 0.6
 V1 IBP_1U<1> 0 dc 0.6
-V2 IBP_1U<2> 0 dc 0.7
-V3 IBP_1U<3> 0 dc 0.8
+V2 IBP_1U<2> 0 dc 0.6
+V3 IBP_1U<3> 0 dc 0.6
 
+* LPI/LPO short (gate node of PMOS mirror)
 VLP LPI LPO dc 0
+
+* DC path for gate node LPO (avoids singular matrix; 1G has negligible loading)
+RLPO LPO VSS 1G
 
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
-
 .include ../xdut.spi
-
-
 
 *----------------------------------------------------------------
 * PROBE
@@ -51,14 +58,13 @@ VLP LPI LPO dc 0
 .option savecurrents=all
 #endif
 
-.save v(LPI)
+.save v(vd1)
+.save v(lpi)
 .save i(V0)
 .save i(V1)
 .save i(V2)
 .save i(V3)
-.save i(vdd)
-
-
+.save i(VDD)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -71,11 +77,11 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
-tran 1n {t_end}
+* uic = use initial conditions (skip DC op; helps bipolar/bandgap converge)
+tran 1n 10u uic
 write
 
 quit
-
 .endc
 
 .end

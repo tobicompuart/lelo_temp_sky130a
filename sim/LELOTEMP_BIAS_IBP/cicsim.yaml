@@ -5,5 +5,5 @@ corner:
   Lay: ''
   Sch: ''
 ngspice:
-  library: JNW_BIAS_SKY130A
-  cell: JNW_BIAS_IBP
+  library: LELOTEMP_SKY130A
+  cell: LELOTEMP_BIAS_IBP

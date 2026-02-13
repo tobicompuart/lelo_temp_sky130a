@@ -6,11 +6,18 @@
 
 # Who
 
-Carsten Wulff
+Tobias Horelt
 
 # Why
 
-Example of a temperature sensor 
+This repository is the **Milestone 1** delivery for the course project: design of a simple **bandgap circuit** that provides a current proportional to absolute temperature (PTAT) and a voltage complementary to absolute temperature (CTAT). For this milestone, I used the example ip directory lelo_temp_sky130a as a starting point. I also used some of the components from the example design file, but created my own, simpler circuit where I followed the lecture explanations. I deleted the example simulations folder and created a new one where I adjustet the default testbench.
+
+# Milestone 1: The bandgap
+
+- **Goal:** A circuit that turns temperature into PTAT current and CTAT voltage.
+- **Design:** Simplified “Figure 6” style bandgap: two bipolars at different current densities (1:8), one resistor, and an OTA in a feedback loop. See [design/LELO_TEMP_SKY130A/LELOTEMP_BIAS_IBP.md](design/LELO_TEMP_SKY130A/LELOTEMP_BIAS_IBP.md) for equations and fitting values.
+- **Schematic:** [design/LELO_TEMP_SKY130A/LELOTEMP_BIAS_IBP.sch](design/LELO_TEMP_SKY130A/LELOTEMP_BIAS_IBP.sch)
+- **Testbenches:** [sim/LELOTEMP_BIAS_IBP/](sim/LELOTEMP_BIAS_IBP/)
 
 # How
 
@@ -24,112 +31,5 @@ temperature ($V_{CTAT}$). A relaxation oscillator converts the current and
 voltage into a frequency ($f_{OSC}$). A digital finite-state-machine and a
 counter converts the frequency to a digital value that is proportional to
 temperature. 
-
-![](system.svg)
-
-<sub> Figure 0: System overview </sub>
-
-This temperature sensor was made to conform to the specification at [The
-Project: Design a temperature sensor](https://analogicus.com/aic2026/2026/01/09/The-Project.html#the-project-design-a-temperature-sensor).
-
-For more information on the oscillator, see [Schematics](http://analogicus.com/lelo_temp_sky130a/schematic.html).
-
-To measure the frequency of the oscillator we need a frequency reference. One
-reference that is usually available in a MCU system is a 32768 Hz oscillator
-($f_{32KI}$ in Figure 0).
-The reason for that specific frequency is to accurately be able to count to 1 second with
-a binary counter, and apparently to have a frequency for the crystal that is
-higher than 20 kHz, so we can't hear it (according to <https://youtu.be/_2By2ane2I4?si=8ltUNqAPL71zCQUW>).
-
-The principle of operation of the FSM and counter can be seen in Figure 1. 
-
-The FSM starts in a IDLE state where a counter is reset. Next the temperature dependent oscillator is
-started, and a number of oscillator pulses are counted. The FSM runs on LF_CLK
-and we use the count x LF_CLK to measure the oscillation frequency. 
-
-After one clock period the FSM powers down the oscillator. In the CAPTURE state
-the value of the counter is stored, and the FSM returns to idle.
-
-![](sim/tb_lelo_temp/tempFsm.svg)
-
-<sub>Figure 1: Finite-State Machine to control temperature sensor</sub> 
-
-A waveform of the sequence can be seen in Figure 2. When the signal start is
-asserted the FSM transitions to power up
-the oscillator (pwrupOsc=1), and we can notice the clkOsc counts the clock
-pulses of the oscillator. On the next lfClk the oscillator is shut down and the
-counter naturally stops. The value from the oscillator is stored in the cycles
-register. 
-
-![](sim/tb_lelo_temp/tb.png)
-
-<sub>Figure 2: Waves from simulation of the oscillator </sub>
-
-In the [testbench](sim/tb_lelo_temp/tb.v) I store the cycles, and the testbench
-temperature to a file, and use [tb.py](sim/tb_lelo_temp/tb.py) to plot the
-transfer function.
-
-I use a physical model of the oscillator ([LELO_TEMP.py](py/LELO_TEMP.py)) to
-create a function to turn the frequency back to a temperature. It can be seen
-that the frequency has a non-zero second order derivative, and thus, the shape
-of the curve needs to be compensated for. See the python model for details.
-
-![](sim/tb_lelo_temp/verilog.png)
-
-<sub>Figure 3: Simulation of the verilog model of the oscillator</sub>
-
-# What
-
-| What            | Cell/Name                              |
-|:----------------|:---------------------------------------|
-| Schematic       | design/LELO_TEMP_SKY130A/LELO_TEMP.sch |
-| Layout          | design/LELO_TEMP_SKY130A/LELO_TEMP.mag |
-| Verilog Model   | design/LELO_TEMP_SKY130A/LELO_TEMP.v   |
-| Verilog Counter | rtl/tempCounter.v                      |
-| Verilog Fsm     | rtl/tempFsm.v                          |
-| Verilog TB      | sim/tb_lelo_temp/tb.v                  |
-| Analog top TB   | sim/LELO_TEMP/tran.spi                 |
-
-
-# Signal interface
-
-| Signal       | Direction | Domain  | Description                                   |
-|:-------------|:---------:|:-------:|:----------------------------------------------|
-| VDD_1V8      | Input     | VDD_1V8 | Main supply                                   |
-| PWRUP_1V8    | Input     | VDD_1V8 | Power up the temperature dependent oscillator |
-| OSC_TEMP_1V8 | Output    | VDD_1V8 | Temperature dependent frequency               |
-| VSS          | Input     | Ground  |                                               |
-
-# Key parameters
-
-| Parameter             | Min | Typ             | Max | Unit |
-|:----------------------|:---:|:---------------:|:---:|:----:|
-| Technology            |     | Skywater 130 nm |     |      |
-| AVDD                  | 1.7 | 1.8             | 1.9 | V    |
-| Oscillation frequency | 1.7 | 3.0             | 4.0 | MHz  |
-| Temperature           | -40 | 27              | 125 | C    |
-
-# Simulation graphs
-
-Typical temperature error of the sensor is low, but I've calibrated the second
-order correction for typical conditions.   
-
-Over mismatch and extreme test condition (ETC) the temperature error increase. 
-
-
-![](sim/LELO_TEMP/tran_Sch_typical.png)
-
-<sub> Figure 4: Typical simulation results of the oscillator</sub>
-
-
-![](sim/LELO_TEMP/tran_Sch_mc.png)
-
-<sub> Figure 5: Mismatch simulation of the oscillator</sub>
-
-
-
-![](sim/LELO_TEMP/tran_Sch_etc.png)
-
-<sub> Figure 6: Extreme test conditions (PVT) simulation of oscillator </sub>
 
 
